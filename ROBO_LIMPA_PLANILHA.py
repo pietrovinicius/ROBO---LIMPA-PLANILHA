@@ -22,8 +22,14 @@ caracteres_a_substituir = {
     "Ü": "U",
     "Ç": "C",
     "#": "",
-    "*": ""    
-}
+    "*": "",
+    "!": "",
+    "@": "",
+    "#": "",
+    "$": "",
+    "%": "",
+    "&": ""
+} 
 
 # Retira os acentos das vogais
 def remover_acentos(texto):
@@ -43,31 +49,21 @@ print("Seleciona a planilha")
 sheet = wb["aba"]
 
 # Cria uma lista com os nomes da coluna A
-print("Cria uma lista com os nomes da coluna A;")
-nomes = []
+print("Cria uma lista com os nomes da coluna;")
+coluna_1 = []
+coluna_2 = []
 for i in range(1, sheet.max_row + 1):
-    nomes.append(remover_acentos(sheet["A" + str(i)].value))  
-    #print(remover_acentos(sheet["A" + str(i)].value))
-
-# Cria uma lista vazia para armazenar os nomes sem caracteres especiais
-print("Cria uma lista vazia para armazenar os nomes sem caracteres especiais;")
-nomes_limpos = []
-
-# Retira os caracteres especiais de cada nome
-print("Retira os caracteres especiais de cada nome;")
-for nome in nomes:
-    nomes_limpos.append(nome.translate(str.maketrans('', '', string.punctuation)))
-
-# Retira os acentos dos nomes sem caracteres especiais
-print("Retira os acentos dos nomes sem caracteres especiais;")
-for nome in nomes_limpos:
-    nomes_limpos[nomes_limpos.index(nome)] = unicodedata.normalize("NFD", nome)  
+    #print(sheet["A" + str(i)].value)
+    coluna_1.append(remover_acentos(sheet["A" + str(i)].value))  
+    coluna_2.append(remover_acentos(sheet["D" + str(i)].value))  
 
 # Salva os nomes sem caracteres especiais na planilha
-print("Salva os nomes sem caracteres especiais na planilha;")
+print("Salva os nomes sem caracteres especiais na planilha;\n")
 for i in range(1, sheet.max_row + 1):
     #print( nomes_limpos[i - 1])
-    sheet["A" + str(i)].value = nomes_limpos[i - 1]
+    sheet["A" + str(i)].value = coluna_1[i - 1]
+    sheet["D" + str(i)].value = coluna_2[i - 1]
+    print(coluna_1[i - 1] + " - " + coluna_2[i - 1])
 
 # Salva o arquivo Excel
 wb.save("planilha_limpa_.xlsx")
