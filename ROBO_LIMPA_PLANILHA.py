@@ -41,32 +41,46 @@ def remover_acentos(texto):
 
 print("================================= INICIALIZADO ======================")
 
-# Abre o arquivo Excel
-print("Abre o arquivo Excel;")
-wb = openpyxl.load_workbook("planilha.xlsx")
+try:
+    # Abre o arquivo Excel
+    print("Abre o arquivo Excel;")
+    wb = openpyxl.load_workbook("planilha.xlsx")
 
-# Seleciona a planilha
-print("Seleciona a planilha")
-sheet = wb["aba"]
+    # Seleciona a planilha
+    print("Seleciona a planilha")
+    sheet = wb["aba"]
 
-# Cria uma lista com os nomes da coluna A
-print("Cria uma lista com os nomes da coluna;")
-coluna_1 = []
-coluna_2 = []
-for i in range(1, sheet.max_row + 1):
-    #print(sheet["A" + str(i)].value)
-    coluna_1.append(remover_acentos(sheet["A" + str(i)].value))  
-    coluna_2.append(remover_acentos(sheet["D" + str(i)].value))  
+    # Cria uma lista com os nomes da coluna A
+    print("Cria uma lista com os nomes da coluna;")
+    coluna_1 = []
+    coluna_2 = []
+    coluna_3 = []
+    coluna_4 = []
+    coluna_5 = []    
 
-# Salva os nomes sem caracteres especiais na planilha
-print("Salva os nomes sem caracteres especiais na planilha;\n")
-for i in range(1, sheet.max_row + 1):
-    #print( nomes_limpos[i - 1])
-    sheet["A" + str(i)].value = coluna_1[i - 1]
-    sheet["D" + str(i)].value = coluna_2[i - 1]
-    #print(coluna_1[i - 1] + " - " + coluna_2[i - 1])
+    for i in range(1, sheet.max_row + 1):
+        #print(sheet["A" + str(i)].value)
+        coluna_1.append(remover_acentos(sheet["A" + str(i)].value))  
+        coluna_2.append(remover_acentos(sheet["B" + str(i)].value))
+        coluna_3.append(remover_acentos(sheet["C" + str(i)].value))  
+        coluna_4.append(remover_acentos(sheet["D" + str(i)].value))  
+        #coluna_5.append(remover_acentos(sheet["E" + str(i)].value))  
 
-# Salva o arquivo Excel
-wb.save("planilha_limpa_.xlsx")
-print("wb.save(planilha_limpa_.xlsx);")
+    # Salva os nomes sem caracteres especiais na planilha
+    print("Salva os nomes sem caracteres especiais na planilha;\n")
+    for i in range(1, sheet.max_row + 1):
+        #print( nomes_limpos[i - 1])
+        sheet["A" + str(i)].value = coluna_1[i - 1]
+        sheet["B" + str(i)].value = coluna_2[i - 1]
+        sheet["C" + str(i)].value = coluna_3[i - 1]
+        sheet["D" + str(i)].value = coluna_4[i - 1]
+        #sheet["E" + str(i)].value = coluna_5[i - 1]
+        #print(coluna_1[i - 1] + " - " + coluna_2[i - 1])
+
+    # Salva o arquivo Excel
+    wb.save("planilha_limpa_.xlsx")
+    print("wb.save(planilha_limpa_.xlsx);")
+except Exception as err:
+    print(f"Erro inexperado {err=}, {type(err)=}")
+
 print("================================= FINALIZADO ======================")
