@@ -34,6 +34,7 @@ caracteres_a_substituir = {
 # Retira os acentos das vogais
 def remover_acentos(texto):
     for caractere_original, caractere_substituido in caracteres_a_substituir.items():
+        texto = texto.strip()
         texto = texto.upper()
         texto = texto.replace(caractere_original, caractere_substituido)
     return texto
@@ -63,7 +64,7 @@ for i in range(1, sheet.max_row + 1):
     #print( nomes_limpos[i - 1])
     sheet["A" + str(i)].value = coluna_1[i - 1]
     sheet["D" + str(i)].value = coluna_2[i - 1]
-    print(coluna_1[i - 1] + " - " + coluna_2[i - 1])
+    #print(coluna_1[i - 1] + " - " + coluna_2[i - 1])
 
 # Salva o arquivo Excel
 wb.save("planilha_limpa_.xlsx")
