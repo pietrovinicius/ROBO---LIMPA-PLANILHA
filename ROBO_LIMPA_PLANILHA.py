@@ -8,7 +8,7 @@ import unicodedata
 
 def remover_acentos_e_caracteres_especiais(texto):
     caracteres_especiais = [
-        "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-",
+        "!", "\"", "#", "$", "%", "&", "'", "*", "+", ",", "-",
         ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_",
         "`", "{", "|", "}", "~"
     ]   
@@ -53,10 +53,11 @@ try:
         sheet["C" + str(i)].value = coluna_3[i - 1]
         sheet["D" + str(i)].value = coluna_4[i - 1]
         #print(coluna_1[i - 1] + " - " + coluna_2[i - 1])
-
+    
     # Salva o arquivo Excel
     wb.save("planilha_limpa_.xlsx")
     print("wb.save(planilha_limpa_.xlsx);")
+    print(f"Planilha: planilha.xlsx\nAba: {wb.sheetnames}")
     print("================================= FINALIZADO ======================")
 except Exception as erro:
     print(f"Error: {erro}")
